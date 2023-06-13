@@ -19,7 +19,7 @@ public class Dispatcher {
             measures.options(optionOfConversion, amount);
         } else if (thing.equals("temperature")) {
             ConTemperature temperature = new ConTemperature();
-            System.out.println("convert temperature");
+            temperature.options(optionOfConversion, amount);
         } else {
             System.out.println("invalid value");
         }
