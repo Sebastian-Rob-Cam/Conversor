@@ -9,10 +9,11 @@ public class Dispatcher {
     public Dispatcher() {
     }
 
-    public void todo(String thing, String option) {
+    public void todo(String thing, String optionOfConversion) {
 
         if(thing.equals("currency")) {
             ConCurrency currency = new ConCurrency();
+            currency.options(optionOfConversion, 1);
         } else if (thing.equals("measures")) {
             ConMeasures measures = new ConMeasures();
             System.out.println("convert measures");
