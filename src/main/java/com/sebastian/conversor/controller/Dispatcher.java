@@ -9,20 +9,23 @@ public class Dispatcher {
     public Dispatcher() {
     }
 
-    public void todo(String thing, String optionOfConversion, double amount) {
+    public double todo(String type, String optionOfConversion, double amount) {
 
-        if(thing.equals("currency")) {
+        double conversionResult = 0;
+
+        if(type.equals("Currencys")) {
             ConCurrency currency = new ConCurrency();
-            currency.options(optionOfConversion, amount);
-        } else if (thing.equals("measures")) {
+            conversionResult = currency.options(optionOfConversion, amount);
+        } else if (type.equals("Measures")) {
             ConMeasures measures = new ConMeasures();
-            measures.options(optionOfConversion, amount);
-        } else if (thing.equals("temperature")) {
+            conversionResult = measures.options(optionOfConversion, amount);
+        } else if (type.equals("Temperature")) {
             ConTemperature temperature = new ConTemperature();
-            temperature.options(optionOfConversion, amount);
+            conversionResult = temperature.options(optionOfConversion, amount);
         } else {
             System.out.println("invalid value");
         }
 
+        return conversionResult;
     }
 }
