@@ -10,49 +10,54 @@ public class ConCurrency {
     private connectionAPI apiReq = new connectionAPI();
     private Gson gson = new Gson();
 
-    public void options(String option, double amount) {
+    private double result = 0;
+
+    public double options(String option, double amount) {
+
         HashMap<String, Runnable> convertMapping = new HashMap<>();
         convertMapping.put("pesosadolar", () -> {
             double mxnToUsdRate = getConversionRate("MXN", "USD");
-            System.out.println(mxnToUsdRate * amount);
+            result = mxnToUsdRate * amount;
         });
         convertMapping.put("pesosaeuro", () -> {
             double mxnToEurRate = getConversionRate("MXN", "EUR");
-            System.out.println(mxnToEurRate * amount);
+            result = mxnToEurRate * amount;
         });
         convertMapping.put("pesosalibras", () -> {
             double mxnToGbpRate = getConversionRate("MXN", "GBP");
-            System.out.println(mxnToGbpRate * amount);
+            result = mxnToGbpRate * amount;
         });
         convertMapping.put("pesosayen", () -> {
             double mxnToJpyRate = getConversionRate("MXN", "JPY");
-            System.out.println(mxnToJpyRate * amount);
+            result = mxnToJpyRate * amount;
         });
         convertMapping.put("pesosawoncoraneo", () -> {
             double mxnToKrwRate = getConversionRate("MXN", "KRW");
-            System.out.println(mxnToKrwRate * amount);
+            result = mxnToKrwRate * amount;
         });
         convertMapping.put("dolarapesos", () -> {
             double usdToMxnRate = getConversionRate("USD", "MXN");
-            System.out.println(usdToMxnRate * amount);
+            result = usdToMxnRate * amount;
         });
         convertMapping.put("euroapesos", () -> {
             double eurToMxnRate = getConversionRate("EUR", "MXN");
-            System.out.println(eurToMxnRate * amount);
+            result = eurToMxnRate * amount;
         });
         convertMapping.put("librasapesos", () -> {
             double gbpToMxnRate = getConversionRate("GBP", "MXN");
-            System.out.println(gbpToMxnRate * amount);
+            result = gbpToMxnRate * amount;
         });
 
         if (option != null && convertMapping.containsKey(option)) {
             Runnable runnable = convertMapping.get(option);
             runnable.run();
+            return result;
         } else {
             // Manejar el caso en que el parámetro no tenga una asignación válida
             System.out.println("Conversion invalida");
         }
 
+        return result;
     }
 
     private double getConversionRate(String currencyCode, String targetCurrency) {
